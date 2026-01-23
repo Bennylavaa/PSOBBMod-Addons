@@ -1970,6 +1970,8 @@ local function AddServerItems(server)
         t[ 0x024F00 ] = { COLOR_RARE, true } -- Varuna*
         t[ 0x025000 ] = { COLOR_RARE, true } -- Kalki*
         t[ 0x025100 ] = { COLOR_RARE, true } -- Vritra*
+        t[ 0x025200 ] = { COLOR_RARE, true } -- Present*
+        t[ 0x025300 ] = { COLOR_RARE, true } -- Saraswati
         t[ 0x030E28 ] = { COLOR_RARE, true } -- Heart of Daisy Chain
         t[ 0x030E29 ] = { COLOR_RARE, true } -- Heart of Crazy Tune
         t[ 0x030E2A ] = { COLOR_RARE, true } -- Heart of Rianov 303SNR
@@ -2029,6 +2031,9 @@ local function AddServerItems(server)
         t[ 0x030E60 ] = { COLOR_RARE, true } -- Divine Filter
         t[ 0x030E61 ] = { COLOR_RARE, true } -- Lock-on Filter
         t[ 0x030E62 ] = { COLOR_RARE, true } -- Heart of Partisan of Lightning
+        t[ 0x030E63 ] = { COLOR_RARE, true } -- Sonic Doll
+        t[ 0x030E64 ] = { COLOR_RARE, true } -- Mag Gift Wrap
+        t[ 0x030E65 ] = { COLOR_RARE, true } -- Seed Exchange Kit
         t[ 0x031005 ] = { COLOR_RARE, true } -- Event Egg
         t[ 0x031006 ] = { COLOR_RARE, true } -- 1st Anniv. Bronze Badge
         t[ 0x031007 ] = { COLOR_RARE, true } -- 1st Anniv. Silver Badge
