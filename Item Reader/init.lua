@@ -1220,10 +1220,15 @@ local function PresentBank(save)
     end
     local itemCount = table.getn(cache_bank.items)
 
+    -- Read the maximum number of bank items from an instruction in the game's code that
+    -- initializes all of the bank items.
+    local maxNumBankItems = pso.read_u32(0x6ca302 + 1)
     if options.aio.newLineForMesetaInventory then
-        TextCWrapper(true, lib_items_cfg.itemIndex, "Meseta: %i | Items: %i / 200", cache_bank.meseta, itemCount)
+        TextCWrapper(true, lib_items_cfg.itemIndex, "Meseta: %i | Items: %i / %i", 
+            cache_bank.meseta, itemCount, maxNumBankItems)
     else
-        TextCWrapper(false, lib_items_cfg.itemIndex, "Meseta: %i | Items: %i / 200", cache_bank.meseta, itemCount)
+        TextCWrapper(false, lib_items_cfg.itemIndex, "Meseta: %i | Items: %i / %i", 
+            cache_bank.meseta, itemCount, maxNumBankItems)
     end
 
     for i=1,itemCount,1 do
