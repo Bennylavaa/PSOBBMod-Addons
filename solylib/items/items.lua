@@ -7,6 +7,7 @@ local _ItemArrayCount = 0x00A8D820
 
 local _Meseta =  0xE4C
 local _BankPointer =    0x00A95DE0 + 0x18
+local _ExpandedBankPointer = 0xB5F810
 
 local _ItemID = 0xD8
 local _ItemOwner = 0xE4
@@ -717,11 +718,26 @@ local function GetBank()
     bank.meseta = 0
     bank.items = {}
 
-    local bankAddress = pso.read_i32(_BankPointer)
-    if bankAddress ~= 0 then
-        bankAddress = bankAddress + 0x021C
+    local bankAddress
 
-        local count = pso.read_u8(bankAddress)
+    -- Handle a client patch to increase the bank size.
+    local bankMaxCountCheck = pso.read_u32(0x6ca302 + 1) 
+    local expandedBank = pso.read_u32(_ExpandedBankPointer)
+
+    if 200 == bankMaxCountCheck or 0 == expandedBank then
+        -- Appears to be the vanilla bank inside the client.
+        bankAddress = pso.read_u32(_BankPointer)
+        if 0 ~= bankAddress then
+            -- Offset in character data to the bank.
+            bankAddress = bankAddress + 0x21c
+        end
+    else
+        -- Client has an expanded bank. Check the new anchor pointer.
+        bankAddress = expandedBank
+    end
+
+    if bankAddress ~= 0 then
+        local count = pso.read_u32(bankAddress)
         bank.meseta = pso.read_i32(bankAddress + 4)
 
         local itemIndex = 0
